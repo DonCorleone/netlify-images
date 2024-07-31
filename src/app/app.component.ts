@@ -6,7 +6,7 @@ import {NgOptimizedImage} from "@angular/common";
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NgOptimizedImage],
-  template: '<img ngSrc="/.netlify/images?url=/../assets/c835453375186b82045edd07b531584660ad0574-2400x1260.png" width="400" height="200" priority alt="">',
+  template: '<img ngSrc="/.netlify/images?url=assets/c835453375186b82045edd07b531584660ad0574-2400x1260.png" width="400" height="200" priority alt="">',
   styles: ''
 })
 export class AppComponent {
