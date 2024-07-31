@@ -19,5 +19,5 @@ import {NgOptimizedImage} from "@angular/common";
 })
 export class AppComponent {
   imgUrlFixed = '/.netlify/images?url=assets/c835453375186b82045edd07b531584660ad0574-2400x1260.png';
-  imgUrlFixedWithParams = '/.netlify/images?url=assets/c835453375186b82045edd07b531584660ad0574-2400x1260.png&fit=cover&w=50&h=50&position=left';
+  imgUrlFixedWithParams = '/.netlify/images?url=assets/c835453375186b82045edd07b531584660ad0574-2400x1260.png&fit=cover&w=50&h=50&position=right';
 }
