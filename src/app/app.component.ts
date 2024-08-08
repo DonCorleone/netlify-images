@@ -1,23 +1,22 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgOptimizedImage],
+  imports: [NgOptimizedImage],
   template: `
-    <div style="width: 50px; height: 50px">
-      <img [ngSrc]="imgUrlFixedWithParams" fill priority alt="" style="max-width: 50px; max-height: 50px" >
+    <div>
+      <img [ngSrc]="imgUrlFixedWithParams" width="50" height="50" priority alt="" style="object-fit:fill">
     </div>
     <div>
       <img [ngSrc]="imgUrlFixed" width="400" height="200" priority alt="">
     </div>
-   `
-,
+  `
+  ,
   styles: ''
 })
 export class AppComponent {
-  imgUrlFixed = '/.netlify/images?url=assets/c835453375186b82045edd07b531584660ad0574-2400x1260.png';
-  imgUrlFixedWithParams = '/.netlify/images?url=assets/c835453375186b82045edd07b531584660ad0574-2400x1260.png&fit=cover&w=50&h=50&position=right';
+  imgUrlFixedWithParams = 'https://netlify-images.netlify.app/.netlify/images?url=assets/c835453375186b82045edd07b531584660ad0574-2400x1260.png?width=50&height=50';
+  imgUrlFixed = 'https://netlify-images.netlify.app/.netlify/images?url=assets/c835453375186b82045edd07b531584660ad0574-2400x1260.png';
 }
