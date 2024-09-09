@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
     if (!token) {
 
       const opts = {
-        container: 'netlify-identity-widget', // default: undefined
+        container: '#netlify-identity-widget', // default: undefined
         locale: 'en', // default: undefined
       };
       NetlifyIdentityWidget.init(opts);
