@@ -3,6 +3,7 @@ import {NgOptimizedImage} from "@angular/common";
 import * as NetlifyIdentityWidget from "netlify-identity-widget"
 import {AuthButtonComponent} from "./auth-button/auth-button.component";
 import {RouterLink, RouterOutlet} from "@angular/router";
+import {GoTrueUser} from "./model/gotrue-user";
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -25,38 +26,28 @@ import {RouterLink, RouterOutlet} from "@angular/router";
   `
   ,
   styles: `
-    .content {
-      font-size: 20px;
-      margin: 0 auto;
-      max-width: 800px;
-      width: 80%;
-    }
-    .gif {
-      position: absolute;
-      top: 5px;
-      left: 300px;
-    }
-    .title {
-      float: left;
-      margin: 0;
-      width: 200px;
-    }
-    .text {
-      margin: 0 auto;
-      width: 70%;
-    }
+
   `
 })
 export class AppComponent implements OnInit {
   title = 'angular-netlify-identity';
   ngOnInit() {
-    // read the jwt from the cookies
-    const jwt = NetlifyIdentityWidget.currentUser()?.token?.access_token;
 
-    console.log(jwt);
-    // if the jwt is present, then set it in the local storage
-    if (jwt) {
-      localStorage.setItem('token', jwt);
+    // read the jwt from the local storage
+    const token: string | null = localStorage.getItem('gotrue.user');
+    console.log('token ' + JSON.stringify(token));
+
+    if (!token) {
+      // if the jwt is not present, then get the jwt from the cookies
+      NetlifyIdentityWidget.init();
+      // read the jwt from the cookies
+      const jwt = NetlifyIdentityWidget.currentUser()?.token?.access_token;
+
+      console.log('jwt' + jwt);
+      // if the jwt is present, then set it in the local storage
+      if (jwt) {
+        localStorage.setItem('token', jwt);
+      }
     }
   }
 }
