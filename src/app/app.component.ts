@@ -30,7 +30,28 @@ import {GoTrueUser} from "./model/gotrue-user";
   `
 })
 export class AppComponent implements OnInit {
-  title = 'angular-netlify-identity';
+
+  constructor() {
+    NetlifyIdentityWidget.on('open', () => {
+      console.log('Widget opened'); // Do something when the widget opens
+    });
+    NetlifyIdentityWidget.on('close', () => {
+      console.log('Widget closed'); // Do something when the widget closes
+    });
+    NetlifyIdentityWidget.on('init', user => {
+      console.log('Widget initialized'); // Do something when the widget initializes
+    });
+    NetlifyIdentityWidget.on('login', user => {
+      console.log('Widget logged in'); // Do something when the user logs in
+    });
+    NetlifyIdentityWidget.on('logout', () => {
+      console.log('Widget logged out'); // Do something when the user logs out
+    });
+    NetlifyIdentityWidget.on('error', err => {
+      console.error('Widget error', err); // Do something with the error
+    });
+  }
+
   ngOnInit() {
 
     // read the jwt from the local storage
