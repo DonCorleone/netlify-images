@@ -12,11 +12,11 @@ import {GoTrueUser} from "./model/gotrue-user";
     <nav>
       <ul>
         <li>
-          <div class="login" data-netlify-identity-button>Open</div>
+          <div class="login" data-netlify-identity-button></div>
         </li>
       </ul>
     </nav>
-    <div id="netlify-identity-widget"></div>
+    <div id="netlify-identity-widget">go</div>
 
     <router-outlet></router-outlet>
     <!--app-auth-button></app-auth-button>
