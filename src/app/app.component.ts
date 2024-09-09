@@ -41,13 +41,6 @@ export class AppComponent implements OnInit {
       // if the jwt is not present, then get the jwt from the cookies
       NetlifyIdentityWidget.init();
       // read the jwt from the cookies
-      const jwt = NetlifyIdentityWidget.currentUser()?.token?.access_token;
-
-      console.log('jwt' + jwt);
-      // if the jwt is present, then set it in the local storage
-      if (jwt) {
-        localStorage.setItem('token', jwt);
-      }
     }
   }
 }
