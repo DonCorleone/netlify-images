@@ -15,41 +15,6 @@ import {RouterLink, RouterOutlet} from "@angular/router";
         </li>
       </ul>
     </nav>
-    <div class="content">
-      <h1 class="title">Angular Netlify Identity Demo</h1>
-      <iframe
-        src="https://giphy.com/embed/IbHargNoRiQvmnGyj7"
-        width="300px"
-        height="250px"
-        frameBorder="0"
-      ></iframe>
-      <div class="text">
-        <p>
-          Welcome to the Angular Netlify Identity Demo, glad to have you here! You
-          can find the
-          <a href="https://github.com/tzmanics/angular-netlify-identity-demo"
-          >repo for this project here!</a
-          >
-        </p>
-        <p>
-          (つ・▽・)つ⊂(・▽・⊂)
-        </p>
-
-        <p>
-          You can learn more about
-          <a
-            href="https://docs.netlify.com/visitor-access/identity/?utm_source=blog&utm_medium=angular-identity-tzm&utm_campaign=devex"
-          >Netlify Identity</a
-          >
-          and Angular in
-          <a
-            href="https://www.netlify.app/blog/2020/07/02/authenticating-users-with-angular-and-netlify-identity/?utm_source=blog&utm_medium=angular-identity-tzm&utm_campaign=devex"
-          >this blog post</a
-          >
-          ヽ(´∇｀)ﾉ
-        </p>
-      </div>
-    </div>
     <router-outlet></router-outlet>
     <!--app-auth-button></app-auth-button>
     <nav>
@@ -82,5 +47,16 @@ import {RouterLink, RouterOutlet} from "@angular/router";
     }
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  title = 'angular-netlify-identity';
+  ngOnInit() {
+    // read the jwt from the cookies
+    const jwt = NetlifyIdentityWidget.currentUser()?.token?.access_token;
+
+    console.log(jwt);
+    // if the jwt is present, then set it in the local storage
+    if (jwt) {
+      localStorage.setItem('token', jwt);
+    }
+  }
 }
