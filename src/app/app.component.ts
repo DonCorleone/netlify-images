@@ -16,6 +16,8 @@ import {GoTrueUser} from "./model/gotrue-user";
         </li>
       </ul>
     </nav>
+    <div id="netlify-identity-widget"></div>
+
     <router-outlet></router-outlet>
     <!--app-auth-button></app-auth-button>
     <nav>
