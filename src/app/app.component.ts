@@ -12,7 +12,7 @@ import {GoTrueUser} from "./model/gotrue-user";
     <nav>
       <ul>
         <li>
-          <div class="login" data-netlify-identity-button></div>
+          <div class="login" data-netlify-identity-button>whatthefuck</div>
         </li>
       </ul>
     </nav>
