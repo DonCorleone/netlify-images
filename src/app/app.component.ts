@@ -12,7 +12,7 @@ import {GoTrueUser} from "./model/gotrue-user";
     <nav>
       <ul>
         <li>
-          <div class="login" data-netlify-identity-button>whatthefuck</div>
+          <div class="login" data-netlify-identity-button></div>
         </li>
       </ul>
     </nav>
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
 
     if (!token) {
 
-      NetlifyIdentityWidget.init();
+      NetlifyIdentityWidget.open('login');
     }
   }
 }
