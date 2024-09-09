@@ -32,6 +32,11 @@ import {GoTrueUser} from "./model/gotrue-user";
 export class AppComponent implements OnInit {
 
   constructor() {
+
+  }
+
+  ngOnInit() {
+
     NetlifyIdentityWidget.on('open', () => {
       console.log('Widget opened'); // Do something when the widget opens
     });
@@ -50,9 +55,6 @@ export class AppComponent implements OnInit {
     NetlifyIdentityWidget.on('error', err => {
       console.error('Widget error', err); // Do something with the error
     });
-  }
-
-  ngOnInit() {
 
     // read the jwt from the local storage
     const token: string | null = localStorage.getItem('gotrue.user');
