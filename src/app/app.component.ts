@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
 
     if (!token) {
       // if the jwt is not present, then get the jwt from the cookies
-      NetlifyIdentityWidget.init();
+      // NetlifyIdentityWidget.init();
       // read the jwt from the cookies
     }
   }
