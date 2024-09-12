@@ -12,11 +12,9 @@ import {User} from "netlify-identity-widget";
     ],
     template: `
         @if(!user){
-            <p>Mo User found. Please Login.</p>
-            <button (click)="openIdentityModal()">Login</button>
+            <span>No User found. Please Login.</span><button (click)="openIdentityModal()">Login</button>
         } @else {
-            <p>{{ user.user_metadata?.full_name }}</p>
-            <button (click)="logout()">Logout</button>
+            <span>{{ user.user_metadata?.full_name }}</span><button (click)="logout()">Logout</button>
         }
     `,
     styles: ``
