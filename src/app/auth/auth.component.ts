@@ -14,7 +14,7 @@ import {User} from "netlify-identity-widget";
         @if(!user){
             <span>No User found. Please Login.</span><button (click)="openIdentityModal()">Login</button>
         } @else {
-            <span>{{ user.user_metadata?.full_name }}</span><button (click)="logout()">Logout</button>
+            <span>{{ createUserAvatar(user) }}</span><button (click)="logout()">Logout</button>
         }
     `,
     styles: ``
@@ -50,5 +50,20 @@ export class AuthComponent implements OnInit {
 
     logout() {
         this.netlifyIdentity.logout();
+    }
+
+    createUserAvatar(user: User) {
+        let avatar = '';
+        // if the user has a fullname, use the first letter of the first name and the first letter of the last name as the avatar
+        if (user.user_metadata?.full_name) {
+            const [firstName, lastName] = user.user_metadata.full_name.split(' ');
+            avatar = `${firstName[0]}${lastName[0]}`;
+        } else {
+            // if the user does not have a full name, use the split the email by . before the @ or _ or - or @ itself and use the first letter of each part as the avatar
+            const [email] = user.email.split('@');
+            const parts = email.split(/[._-]/);
+            avatar = parts.map(part => part[0]).join('');
+        }
+        return avatar.toUpperCase();
     }
 }
