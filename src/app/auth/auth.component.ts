@@ -11,10 +11,13 @@ import {User} from "netlify-identity-widget";
         NgIf
     ],
     template: `
-        <div *ngIf="user">
-            <p>Welcome, {{ user.user_metadata?.full_name }}</p>
+        @if(!user){
+            <p>Mo User found. Please Login.</p>
+            <button (click)="openIdentityModal()">Login</button>
+        } @else {
+            <p>{{ user.user_metadata?.full_name }}</p>
             <button (click)="logout()">Logout</button>
-        </div>
+        }
     `,
     styles: ``
 })
