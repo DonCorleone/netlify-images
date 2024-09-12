@@ -1,19 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
+import {Component} from '@angular/core';
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {AuthComponent} from "./auth/auth.component";
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgOptimizedImage, RouterLink, RouterOutlet, AuthComponent],
+  imports: [RouterLink, RouterOutlet, AuthComponent],
   template: `
     <app-auth></app-auth>
-    <!--app-auth-button></app-auth-button>
-    <nav>
-      <a routerLink="/public">Public Page</a>
-      <a routerLink="/protected">Protected Page</a>
-    </nav>
-    <router-outlet></router-outlet-->
   `
   ,
   styles: `
@@ -21,5 +15,4 @@ import {AuthComponent} from "./auth/auth.component";
   `
 })
 export class AppComponent {
-
 }

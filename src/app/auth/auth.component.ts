@@ -3,38 +3,48 @@ import {NetlifyIdentityService} from "../services/auth.service";
 import {NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-auth',
-  standalone: true,
-  imports: [
-    NgIf
-  ],
-  templateUrl: './auth.component.html',
-  styles: ``
+    selector: 'app-auth',
+    standalone: true,
+    imports: [
+        NgIf
+    ],
+    template: `
+        <div *ngIf="!user">
+            <button (click)="openIdentityModal()">Login with Netlify Identity</button>
+        </div>
+
+        <div *ngIf="user">
+            <p>Welcome, {{ user?.user_metadata?.full_name }}</p>
+            <button (click)="logout()">Logout</button>
+        </div>
+    `,
+    styles: ``
 })
 export class AuthComponent implements OnInit {
-  user: any;
+    user: any;
 
-  constructor(private netlifyIdentity: NetlifyIdentityService) {}
+    constructor(private netlifyIdentity: NetlifyIdentityService) {
+    }
 
-  ngOnInit(): void {
-    // Check if the user is logged in when the component initializes
-    this.user = this.netlifyIdentity.getCurrentUser();
+    ngOnInit(): void {
+        // Check if the user is logged in when the component initializes
+        this.user = this.netlifyIdentity.getCurrentUser();
 
-    // Subscribe to login/logout events
-    this.netlifyIdentity.onLogin((user) => {
-      this.user = user;
-    });
+        // Subscribe to login/logout events
+        this.netlifyIdentity.onLogin((user) => {
+            this.user = user;
+        });
 
-    this.netlifyIdentity.onLogout(() => {
-      this.user = null;
-    });
-  }
+        this.netlifyIdentity.onLogout(() => {
+            this.user = null;
+        });
+    }
 
-  openIdentityModal() {
-    this.netlifyIdentity.openModal();
-  }
+    openIdentityModal() {
+        this.netlifyIdentity.openModal();
+    }
 
-  logout() {
-    this.netlifyIdentity.logout();
-  }
+    logout() {
+        this.netlifyIdentity.logout();
+    }
 }

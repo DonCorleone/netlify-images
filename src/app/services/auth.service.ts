@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import netlifyIdentity from 'netlify-identity-widget';
 
 @Injectable({
