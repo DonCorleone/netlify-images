@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import netlifyIdentity from 'netlify-identity-widget';
+import netlifyIdentity, {User} from 'netlify-identity-widget';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ export class NetlifyIdentityService {
     netlifyIdentity.close();
   }
 
-  getCurrentUser() {
+  getCurrentUser(): User | null {
     return netlifyIdentity.currentUser();
   }
 
@@ -28,7 +28,7 @@ export class NetlifyIdentityService {
     netlifyIdentity.logout();
   }
 
-  onLogin(callback: (user: any) => void) {
+  onLogin(callback: (user: User) => void) {
     netlifyIdentity.on('login', callback);
   }
 

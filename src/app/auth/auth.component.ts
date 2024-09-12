@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NetlifyIdentityService} from "../services/auth.service";
 import {NgIf} from "@angular/common";
+import {GoTrueUser} from "../model/gotrue-user";
+import {User} from "netlify-identity-widget";
 
 @Component({
     selector: 'app-auth',
@@ -9,19 +11,15 @@ import {NgIf} from "@angular/common";
         NgIf
     ],
     template: `
-        <div *ngIf="!user">
-            <button (click)="openIdentityModal()">Login with Netlify Identity</button>
-        </div>
-
         <div *ngIf="user">
-            <p>Welcome, {{ user?.user_metadata?.full_name }}</p>
+            <p>Welcome, {{ user.user_metadata?.full_name }}</p>
             <button (click)="logout()">Logout</button>
         </div>
     `,
     styles: ``
 })
 export class AuthComponent implements OnInit {
-    user: any;
+    user: User | null = null;
 
     constructor(private netlifyIdentity: NetlifyIdentityService) {
     }
@@ -30,6 +28,10 @@ export class AuthComponent implements OnInit {
         // Check if the user is logged in when the component initializes
         this.user = this.netlifyIdentity.getCurrentUser();
 
+        if (!this.user) {
+            // If the user is not logged in, subscribe to login events
+            this.openIdentityModal();
+        }
         // Subscribe to login/logout events
         this.netlifyIdentity.onLogin((user) => {
             this.user = user;
@@ -37,6 +39,7 @@ export class AuthComponent implements OnInit {
 
         this.netlifyIdentity.onLogout(() => {
             this.user = null;
+            this.openIdentityModal();
         });
     }
 
