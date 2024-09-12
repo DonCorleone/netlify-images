@@ -54,13 +54,16 @@ export class AuthComponent implements OnInit {
 
     createUserAvatar(user: User) {
         let avatar = '';
+        if (!user?.user_metadata?.full_name || !user?.email) {
+            return avatar;
+        }
         // if the user has a fullname, use the first letter of the first name and the first letter of the last name as the avatar
         if (user.user_metadata?.full_name) {
             const [firstName, lastName] = user.user_metadata.full_name.split(' ');
             avatar = `${firstName[0]}${lastName[0]}`;
         } else {
             // if the user does not have a full name, use the split the email by . before the @ or _ or - or @ itself and use the first letter of each part as the avatar
-            const [email] = user.email?.split('@');
+            const [email] = user.email.split('@');
             const parts = email?.split(/[._-]/);
             avatar = parts?.map(part => part[0]).join('');
         }
