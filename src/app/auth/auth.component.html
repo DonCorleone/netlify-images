@@ -1,0 +1,8 @@
+<div *ngIf="!user">
+  <button (click)="openIdentityModal()">Login with Netlify Identity</button>
+</div>
+
+<div *ngIf="user">
+  <p>Welcome, {{ user?.user_metadata?.full_name }}</p>
+  <button (click)="logout()">Logout</button>
+</div>

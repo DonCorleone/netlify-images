@@ -1,24 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
-import * as NetlifyIdentityWidget from "netlify-identity-widget"
-import {AuthButtonComponent} from "./auth-button/auth-button.component";
 import {RouterLink, RouterOutlet} from "@angular/router";
-import {GoTrueUser} from "./model/gotrue-user";
+import {AuthComponent} from "./auth/auth.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgOptimizedImage, AuthButtonComponent, RouterLink, RouterOutlet],
+  imports: [NgOptimizedImage, RouterLink, RouterOutlet, AuthComponent],
   template: `
-    <nav>
-      <ul>
-        <li>
-          <div class="login" data-netlify-identity-button></div>
-        </li>
-      </ul>
-    </nav>
-    <div id="netlify-identity-widget">go</div>
-
-    <router-outlet></router-outlet>
+    <app-auth></app-auth>
     <!--app-auth-button></app-auth-button>
     <nav>
       <a routerLink="/public">Public Page</a>
@@ -31,44 +20,6 @@ import {GoTrueUser} from "./model/gotrue-user";
 
   `
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  constructor() {
-
-  }
-
-  ngOnInit() {
-
-    NetlifyIdentityWidget.on('open', () => {
-      console.log('Widget opened'); // Do something when the widget opens
-    });
-    NetlifyIdentityWidget.on('close', () => {
-      console.log('Widget closed'); // Do something when the widget closes
-    });
-    NetlifyIdentityWidget.on('init', user => {
-      console.log('Widget initialized'); // Do something when the widget initializes
-    });
-    NetlifyIdentityWidget.on('login', user => {
-      console.log('Widget logged in'); // Do something when the user logs in
-    });
-    NetlifyIdentityWidget.on('logout', () => {
-      console.log('Widget logged out'); // Do something when the user logs out
-    });
-    NetlifyIdentityWidget.on('error', err => {
-      console.error('Widget error', err); // Do something with the error
-    });
-
-    // read the jwt from the local storage
-    const token: string | null = localStorage.getItem('gotrue.user');
-    console.log('token ' + JSON.stringify(token));
-
-    if (!token) {
-
-      const opts = {
-        container: '#netlify-identity-widget', // default: undefined
-        locale: 'en', // default: undefined
-      };
-      NetlifyIdentityWidget.init(opts);
-    }
-  }
 }

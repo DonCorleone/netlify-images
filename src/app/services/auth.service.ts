@@ -1,32 +1,38 @@
 import { Injectable } from '@angular/core';
-import * as netlifyIdentity from 'netlify-identity-widget';
+import netlifyIdentity from 'netlify-identity-widget';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthService {
-  isAuthenticated = false;
-  user: any = null;
-
+export class NetlifyIdentityService {
   constructor() {
+    // Initialize the Netlify Identity widget
     netlifyIdentity.init();
   }
 
-  authenticate(callback: (user: any) => void) {
-    this.isAuthenticated = true;
+  openModal() {
+    // Opens the Netlify Identity modal
     netlifyIdentity.open();
-    netlifyIdentity.on('login', user => {
-      this.user = user;
-      callback(user);
-    });
   }
 
-  signout(callback: () => void) {
-    this.isAuthenticated = false;
+  closeModal() {
+    // Closes the Netlify Identity modal
+    netlifyIdentity.close();
+  }
+
+  getCurrentUser() {
+    return netlifyIdentity.currentUser();
+  }
+
+  logout() {
     netlifyIdentity.logout();
-    netlifyIdentity.on('logout', () => {
-      this.user = null;
-      callback();
-    });
+  }
+
+  onLogin(callback: (user: any) => void) {
+    netlifyIdentity.on('login', callback);
+  }
+
+  onLogout(callback: () => void) {
+    netlifyIdentity.on('logout', callback);
   }
 }
